@@ -41,7 +41,7 @@ const Container2 = styled('div')(({theme}) => ({
 
 const CardWrapper = styled("div")(({ theme }) => ({
   minWidth: 250,
-  maxWidth: 300,
+  width: '250px',
   margin: "10px",
   display: 'inline-block',
   transition: "box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
