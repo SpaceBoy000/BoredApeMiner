@@ -76,7 +76,7 @@ export default function Header() {
           <div className="mobile_head">
             <div className="mobile_herader_content">
               <div style={{alignSelf:"center", marginBottom:"30px"}}>
-                <img src="./favicon.png" alt="ETH Snowball" height="64px"/>
+                <img src="./favicon.png" alt="ETH Snowball" width="64px"/>
               </div>
               <div className="mobile_four_btn">
                 <div onClick= {() => {
@@ -156,15 +156,15 @@ export default function Header() {
       : null }
    
       <Grid container spacing={2}>
-        <Grid item xs={6} sm={2.7}>
-          <div style={{textAlign:"center"}}>
-            {/* <img src="./favicon.png" alt="" style={{ padding: '5px 20px', maxHeight: "96px", marginRight: "16px" }} /> */}
+        <Grid item xs={9} sm={3.5}>
+          <div style={{textAlign:"center", display:'flex', alignItems:'center'}}>
+            <img src="./favicon.png" alt="" style={{ padding: '5px 20px', maxHeight: "64px"}} />
             <Typography variant="h5" textAlign="center" color='white'>
               Bored Ape Miner
             </Typography>
           </div>
         </Grid>
-        <Grid className="header_menu" item xs={12} sm={6.6}>
+        <Grid className="header_menu" item xs={12} sm={5}>
           <Item>
             <a href="https://www.encryptosecurity.com/AuditRecord?project=64" target="_blank"
               style={{
@@ -213,7 +213,7 @@ export default function Header() {
             </a>
           </Item> */}
         </Grid>
-        <Grid item xs={6} sm={2.7} sx={{alignSelf:"center"}}>
+        <Grid item xs={3} sm={3.5} sx={{alignSelf:"center"}}>
           <ItemConnect>
             <Connect />
           </ItemConnect>
