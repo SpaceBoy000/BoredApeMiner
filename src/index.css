@@ -53,6 +53,15 @@ code {
   width: 50%;
 }
 
+.myNFT {
+  display: flex;
+}
+
+.claimBtnContainer {
+  padding-left: 50px;
+  align-self: center;
+}
+
 @media screen and (max-width: 1024px) {
   .header_menu {
     display: none;
@@ -139,6 +148,15 @@ code {
   .banner_img {
     width: inherit;
   }
+
+  .myNFT {
+    display: unset;
+  }
+
+  .claimBtnContainer {
+    text-align: center;
+    padding: 10px 0px 30px 0px;
+  }
 }
 
 .btn_buy {
@@ -154,3 +172,4 @@ code {
   box-shadow: 0px 0px 7px lightblue;
   text-shadow: 0px 0px 7px lightblue;
 }
+

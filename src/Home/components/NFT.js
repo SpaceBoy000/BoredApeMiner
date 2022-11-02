@@ -267,6 +267,7 @@ export default function NFT() {
     allowance: 0,
   });
   const [userCount, setUserCount] = useState(0);
+  const [userInfo, setUserInfo] = useState([]);
   const [bakeBNB, setBakeBNB] = useState(0);
   const [calculatedBeans, setCalculatedBeans] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -400,34 +401,29 @@ export default function NFT() {
     
     console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxx');
     try {
-      const [busdAmount, allowancement, mainKey/*rewardsAmount, miners, userInfo, estimatedRate*/] = await Promise.all([
+      const [busdAmount, allowancement, mainKey, userInfo] = await Promise.all([
         getBusdBalance(address),
         getBusdApproved(address),
-        contract.methods
-            .MainKey(1)
-            .call()
-            .catch((err) => {
-              console.error("userInfo error", err);
-              return 0;
-            })
-        ]);
+        contract.methods.MainKey(1)
+          .call()
+          .catch((err) => {
+            console.error("userInfo error", err);
+            return 0;
+          }),
+        contract.methods.userInfo()
+          .call({from: address})
+          .catch((err) => {
+          console.error('user info error: ', err);
+          return;
+        })
+      ]);
       setWalletBalance({
         busd: fromWei(`${busdAmount}`),
         allowance: fromWei(`${allowancement}`),
       });
       setUserCount(mainKey.users);
-      // const level = (userInfo._lastSell == 0) ? 3 : Math.min(Math.floor((Date.now() / 1000 - userInfo._lastSell) / 604800), 3);
-      // console.log("level: ", level);
-      // console.log("UserInfo: ", userInfo);
-      // setCompoundTimes(userInfo._comopundCount);
-      // setInitialDeposit(fromWei(`${userInfo._initialDeposit}`));
-      // setTotalDeposit(fromWei(`${userInfo._userDeposit}`));
-      // setTotalClaimed(fromWei(`${userInfo._totalWithdrawn}`));
-      // setTotalReferralRewards(fromWei(`${userInfo._referralEggRewards}`));
-      // setEstimatedMinerRate(estimatedRate / EGGS_TO_HATCH_1MINERS * 95 / 100);
-      // setLasthatch(userInfo._lastHatch);
-      // setLevel(level);
-      // setLastSell(userInfo._lastSell);
+      console.log('user info => ', userInfo);
+      setUserInfo(userInfo);
     } catch (err) {
       console.error(err);
       setWalletBalance({
@@ -571,7 +567,7 @@ export default function NFT() {
     // }
 
     try {
-      await contract.methods.ClaimRewards().send({
+      await contract.methods.claimRewards().send({
         from: address,
       });
     } catch (err) {
@@ -585,50 +581,50 @@ export default function NFT() {
   return (
     <>
       <Container2>
-        {/* <div class="content-box"> */}
-          <div class="row stats-row-container">
-            <div class="col-lg-2 stat">
-              <div class="header">
-                <i class="bi-bank"></i>
+        {/* <div className="content-box"> */}
+          <div className="row stats-row-container">
+            <div className="col-lg-2 stat">
+              <div className="header">
+                <i className="bi-bank"></i>
                 <span> TVL</span>
               </div>
-              <strong id="initial-deposit" class="number"> ${ contractBNB } </strong>
+              <strong id="initial-deposit" className="number"> ${ contractBNB } </strong>
               {/* <div>
-                <strong class="busd">BNB</strong>
+                <strong className="busd">BNB</strong>
               </div> */}
             </div>
-            <div class="col-lg-2 stat">
-              <div class="header">
-                <i class="bi-bank"></i>
+            <div className="col-lg-2 stat">
+              <div className="header">
+                <i className="bi-bank"></i>
                   <span> Users</span>
               </div>
-              <strong id="total-deposit" class="number">{ userCount }</strong>
+              <strong id="total-deposit" className="number">{ userCount }</strong>
               {/* <div>
-                <strong class="busd">BNB</strong>
+                <strong className="busd">BNB</strong>
               </div> */}
             </div>
-            <div class="col-lg-2 stat">
-              <div class="header">
-                <i class="bi-wallet2"></i>
+            <div className="col-lg-2 stat">
+              <div className="header">
+                <i className="bi-wallet2"></i>
                   <span> Stake Fee</span>
               </div>
               <div>
-                <strong id="total-withdrawn" class="number">10%</strong>
+                <strong id="total-withdrawn" className="number">10%</strong>
               </div>
               {/* <div>
-                <strong class="busd">BNB</strong>
+                <strong className="busd">BNB</strong>
               </div> */}
             </div>
-            <div class="col-lg-2 stat">
-              <div class="header">
-                <i class="bi-people"></i>
+            <div className="col-lg-2 stat">
+              <div className="header">
+                <i className="bi-people"></i>
                   <span> Collection Fee </span>
               </div>
               <div>
-                <strong id="ref-rewards-busd" class="number">10%</strong>
+                <strong id="ref-rewards-busd" className="number">10%</strong>
               </div>
               {/* <div>
-                <strong class="busd">BNB</strong>
+                <strong className="busd">BNB</strong>
               </div> */}
             </div>
           </div>
@@ -666,6 +662,96 @@ export default function NFT() {
             </CardWrapper>
           ))}
         </div>
+      </Container>
+      <Container>
+        <div style={{color:'white', fontSize:'30px', padding:'10px 30px'}}>
+          My Bored Apes
+        </div>
+        <div class="row stats-row-container">
+          <div class="col-lg-2 stat">
+            <div class="header">
+              <i class="bi-bank"></i>
+              <span> Initial Deposit</span>
+            </div>
+            <strong id="initial-deposit" class="number">$3265</strong>
+            {/* <div>
+              <strong class="busd">BUSD</strong>
+            </div> */}
+          </div>
+          <div class="col-lg-2 stat">
+            <div class="header">
+              <i class="bi-bank"></i>
+                <span> Current Rewards</span>
+            </div>
+            <strong id="total-deposit" class="number">$300</strong>
+            {/* <div>
+              <strong class="busd">BUSD</strong>
+            </div> */}
+          </div>
+          <div class="col-lg-2 stat">
+            <div class="header">
+              <i class="bi-wallet2"></i>
+                <span> Total Claimed</span>
+            </div>
+            <div>
+              <strong id="total-withdrawn" class="number">$1000</strong>
+            </div>
+            {/* <div>
+              <strong class="busd">BNB</strong>
+            </div> */}
+          </div>
+          <div class="col-lg-2 stat">
+            <div class="header">
+              <i class="bi-people"></i>
+                <span> Referral Rewards </span>
+            </div>
+            <div>
+              <strong id="ref-rewards-busd" class="number">$136</strong>
+            </div>
+            {/* <div>
+              <strong class="busd">BNB</strong>
+            </div> */}
+          </div>
+        </div>
+        <div className="myNFT">
+          <>
+            {userInfo.map((item) => (
+              // console.log('item => ', item)
+              <CardWrapper>
+                <div style={{margin:'5px'}}>
+                  <img src={nutritionFacts[item.level][0].path} alt="nft" width="100%" style={{borderRadius: '20px'}}/>
+                  <CardContent>
+                    <Typography variant="h5" color="white" paddingBottom={1}>
+                      {t(nutritionFacts[item.level][0].name)}
+                    </Typography>
+                    <Box paddingTop={2}>
+                        <Grid container justifyContent="space-between">
+                          <Typography variant="body1" gutterBottom >
+                            Purchase
+                          </Typography>
+                          <Typography gutterBottom >
+                            {(new Date(item.depoTime * 1000)).toLocaleDateString()}
+                          </Typography>
+                        </Grid>
+                        <Grid container justifyContent="space-between">
+                          <Typography variant="body1" gutterBottom >
+                            Rewards
+                          </Typography>
+                          <Typography gutterBottom >
+                            ${(Number(nutritionFacts[item.level][1].properties[0].value.slice(1)) * (Math.min(Date.now() / 1000, item.finishTime) - item.depoTime) / 86400).toFixed(1) }
+                          </Typography>
+                        </Grid>
+                    </Box>
+                  </CardContent>
+                </div>
+              </CardWrapper>
+            ))}
+          </>
+          <div className="claimBtnContainer">
+            <button className='btn_buy' onClick={ eatBeans }>Claim</button>
+          </div>
+        </div>
+        
       </Container>
     </>
   );

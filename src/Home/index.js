@@ -31,7 +31,7 @@ export default function Home() {
       {/* <Header /> */}
       <Banner/>
       <NFT/>
-      <MyNFT/>
+      {/* <MyNFT/> */}
       {/* <BackBrand /> */}
       {/* <MiningTimer />
       <DailyProfit /> */}
