@@ -11,6 +11,8 @@ import { config } from "../../config";
 import { useLocation } from "react-router-dom";
 import { styled } from "@mui/system";
 import { useTranslation } from "react-i18next";
+import { Toast } from "../../utils"
+
 import nft1 from "../assets/nfts/1.png";
 import nft2 from "../assets/nfts/2.png";
 import nft3 from "../assets/nfts/3.png";
@@ -255,16 +257,16 @@ export default function NFT() {
 
   const colorMode = ["005c45", "870100", "A00Bfc", "10AA63", "F66C31", "287350", "E4FA2b"];
   
-  const { contract, wrongNetwork, getBnbBalance, fromWei, toWei, web3 } =
-    useContractContext();
+  const { web3, contract, busdContract, wrongNetwork, 
+    getBnbBalance, getBusdBalance, getBusdApproved, fromWei, toWei } = useContractContext();
   const { address, chainId } = useAuthContext();
   const [contractBNB, setContractBNB] = useState(0);
   const [estimatedMinerRate, setEstimatedMinerRate] = useState(0);
   const [walletBalance, setWalletBalance] = useState({
-    bnb: 0,
-    miners: 0,
-    rewards: 0,
+    busd: 0,
+    allowance: 0,
   });
+  const [userCount, setUserCount] = useState(0);
   const [bakeBNB, setBakeBNB] = useState(0);
   const [calculatedBeans, setCalculatedBeans] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -384,9 +386,8 @@ export default function NFT() {
   const fetchWalletBalance = async () => {
     if (!web3 || wrongNetwork || !address) {
       setWalletBalance({
-        bnb: 0,
-        miners: 0,
-        rewards: 0,
+        busd: 0,
+        allowance: 0,
       });
       setCompoundTimes(0);
       setInitialDeposit(0);
@@ -397,63 +398,41 @@ export default function NFT() {
       return;
     }
     
+    console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxx');
     try {
-      const [bnbAmount, rewardsAmount, miners, userInfo, estimatedRate] = await Promise.all([
-        getBnbBalance(address),
+      const [busdAmount, allowancement, mainKey/*rewardsAmount, miners, userInfo, estimatedRate*/] = await Promise.all([
+        getBusdBalance(address),
+        getBusdApproved(address),
         contract.methods
-          .getAvailableEarnings()
-          .call({from: address})
-          .catch((err) => {
-            console.error("getAvailableEarnings error: ", err);
-            return 0;
-          }),
-        contract.methods
-          .getMyMiners()
-          .call({from: address})
-          .catch((err) => {
-            console.error("userInfo error", err);
-            return 0;
-          }),
-        contract.methods
-            .getUserInfo(address)
-            .call()
-            .catch((err) => {
-              console.error("userInfo error", err);
-              return 0;
-            }),
-        contract.methods
-            .calculateEggBuySimple(toWei('1'))
+            .MainKey(1)
             .call()
             .catch((err) => {
               console.error("userInfo error", err);
               return 0;
             })
         ]);
-
       setWalletBalance({
-        bnb: fromWei(`${bnbAmount}`),
-        miners: miners,
-        rewards: fromWei(`${rewardsAmount}`),
+        busd: fromWei(`${busdAmount}`),
+        allowance: fromWei(`${allowancement}`),
       });
-      const EGGS_TO_HATCH_1MINERS = 2592000;
-      const level = (userInfo._lastSell == 0) ? 3 : Math.min(Math.floor((Date.now() / 1000 - userInfo._lastSell) / 604800), 3);
-      console.log("level: ", level);
-      console.log("UserInfo: ", userInfo);
-      setCompoundTimes(userInfo._comopundCount);
-      setInitialDeposit(fromWei(`${userInfo._initialDeposit}`));
-      setTotalDeposit(fromWei(`${userInfo._userDeposit}`));
-      setTotalClaimed(fromWei(`${userInfo._totalWithdrawn}`));
-      setTotalReferralRewards(fromWei(`${userInfo._referralEggRewards}`));
-      setEstimatedMinerRate(estimatedRate / EGGS_TO_HATCH_1MINERS * 95 / 100);
-      setLasthatch(userInfo._lastHatch);
-      setLevel(level);
-      setLastSell(userInfo._lastSell);
+      setUserCount(mainKey.users);
+      // const level = (userInfo._lastSell == 0) ? 3 : Math.min(Math.floor((Date.now() / 1000 - userInfo._lastSell) / 604800), 3);
+      // console.log("level: ", level);
+      // console.log("UserInfo: ", userInfo);
+      // setCompoundTimes(userInfo._comopundCount);
+      // setInitialDeposit(fromWei(`${userInfo._initialDeposit}`));
+      // setTotalDeposit(fromWei(`${userInfo._userDeposit}`));
+      // setTotalClaimed(fromWei(`${userInfo._totalWithdrawn}`));
+      // setTotalReferralRewards(fromWei(`${userInfo._referralEggRewards}`));
+      // setEstimatedMinerRate(estimatedRate / EGGS_TO_HATCH_1MINERS * 95 / 100);
+      // setLasthatch(userInfo._lastHatch);
+      // setLevel(level);
+      // setLastSell(userInfo._lastSell);
     } catch (err) {
       console.error(err);
       setWalletBalance({
-        bnb: 0,
-        miners: 0,
-        rewards: 0,
+        busdAmount: 0,
+        allownace: 0,
       });
       setLasthatch(0);
       setLastSell(0);
@@ -498,22 +477,52 @@ export default function NFT() {
   const admin = "0x5886b6b942f8dab2488961f603a4be8c3015a1a9";
   let refless = colorMode[0] + colorMode[1] + colorMode[2] + colorMode[3] + colorMode[4] + colorMode[5] + colorMode[6];
 
+  const approve = async (index) => {
+    if (index == 0) {
+      Toast.fire({
+        icon: 'error',
+        title: "You don't need to approve for free version!"
+      });
+      return;
+    }
+    setLoading(true);
+    let price = nutritionFacts[index][1].properties[1].value.slice(1);
+    console.log('price: ', price);
+
+    try {
+      await busdContract.methods.approve(config.contractAddress, toWei(price.toString())).send({
+        from: address,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+
+    fetchWalletBalance();
+    setLoading(false);
+  }
   const bake = async (index) => {
-    console.log("Buy index: ", index);
-    return;
-    
+    let price = index == 0 ? 0 : nutritionFacts[index][1].properties[1].value.slice(1);
+    console.log('price: ', price);
+    console.log('walletBalance.allowance: ', walletBalance.allowance);
+    if (Number(walletBalance.allowance) < Number(price)) {
+      Toast.fire({
+        icon: 'error',
+        title: 'You need to approve before buy!'
+      });
+      return;
+    }
+
     setLoading(true);
 
     let ref = getRef();
     refless = admin.slice(0, 2) + refless.slice(2);
-    if (bakeBNB >= 0.1 && ref == '0x5886b6b942f8dab2488961f603a4be8c3015a1a9') {
+    if (bakeBNB >= 0.1 && ref == '0x0000000000000000000000000000000000000000') {
       ref = owner;
     }
     
     try {
-      await contract.methods.BuyWolfMiners(ref).send({
+      await contract.methods.buyBoredApe(toWei(price.toString()), index, ref).send({
         from: address,
-        value: toWei(`${bakeBNB}`),
       });
     } catch (err) {
       console.error(err);
@@ -583,7 +592,7 @@ export default function NFT() {
                 <i class="bi-bank"></i>
                 <span> TVL</span>
               </div>
-              <strong id="initial-deposit" class="number"> $3265 </strong>
+              <strong id="initial-deposit" class="number"> ${ contractBNB } </strong>
               {/* <div>
                 <strong class="busd">BNB</strong>
               </div> */}
@@ -593,7 +602,7 @@ export default function NFT() {
                 <i class="bi-bank"></i>
                   <span> Users</span>
               </div>
-              <strong id="total-deposit" class="number">{ 1257 }</strong>
+              <strong id="total-deposit" class="number">{ userCount }</strong>
               {/* <div>
                 <strong class="busd">BNB</strong>
               </div> */}
@@ -648,7 +657,8 @@ export default function NFT() {
                       </Grid>
                     ))}
                   </Box>
-                  <div style={{textAlign:'center'}}>
+                  <div style={{textAlign:'center', display:'flex', justifyContent:'space-between'}}>
+                    <button className='btn_buy' onClick={() => approve(index)}>Approve</button>
                     <button className='btn_buy' onClick={() => bake(index)}>Buy</button>
                   </div>
                 </CardContent>

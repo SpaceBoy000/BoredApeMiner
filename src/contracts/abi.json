@@ -2,53 +2,64 @@
 	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "ref",
-				"type": "address"
-			}
-		],
-		"name": "BuyWolfMiners",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "ClaimRewards",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
+				"internalType": "uint256",
+				"name": "amtx",
+				"type": "uint256"
+			},
 			{
-				"internalType": "address",
-				"name": "ref",
-				"type": "address"
-			}
-		],
-		"name": "CompoundRewards",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "seedMarket",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_ceo",
-				"type": "address"
+				"internalType": "uint256",
+				"name": "_level",
+				"type": "uint256"
 			},
 			{
 				"internalType": "address",
-				"name": "_ceo2",
+				"name": "ref",
+				"type": "address"
+			}
+		],
+		"name": "buyBoredApe",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_account",
+				"type": "address"
+			}
+		],
+		"name": "changeOwner",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "claimRewards",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "fundContract",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_busd",
 				"type": "address"
 			}
 		],
@@ -56,90 +67,35 @@
 		"type": "constructor"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "eth",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "contractBalance",
-				"type": "uint256"
-			}
-		],
-		"name": "calculateEggBuy",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
+		"inputs": [],
+		"name": "withdrawRefBonus",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "eth",
-				"type": "uint256"
-			}
-		],
-		"name": "calculateEggBuySimple",
-		"outputs": [
-			{
-				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
 			}
 		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "eggs",
-				"type": "uint256"
-			}
-		],
-		"name": "calculateEggSell",
+		"name": "BoredApeGroup",
 		"outputs": [
 			{
 				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "rt",
+				"name": "daysInSeconds",
 				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
-				"name": "rs",
+				"name": "dailyProfit",
 				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
-				"name": "bs",
-				"type": "uint256"
-			}
-		],
-		"name": "calculateTrade",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
+				"name": "price",
 				"type": "uint256"
 			}
 		],
@@ -148,23 +104,10 @@
 	},
 	{
 		"inputs": [],
-		"name": "ceoAddress",
+		"name": "BUSD",
 		"outputs": [
 			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "ceoAddress2",
-		"outputs": [
-			{
-				"internalType": "address",
+				"internalType": "contract IERC20",
 				"name": "",
 				"type": "address"
 			}
@@ -176,11 +119,11 @@
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "",
+				"name": "dy",
 				"type": "address"
 			}
 		],
-		"name": "compoundTimes",
+		"name": "calcdiv",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -194,48 +137,42 @@
 	{
 		"inputs": [
 			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
 				"internalType": "uint256",
-				"name": "amount",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "DeposMap",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "key",
 				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
-				"name": "_percent",
+				"name": "depoTime",
 				"type": "uint256"
-			}
-		],
-		"name": "devFee",
-		"outputs": [
+			},
 			{
 				"internalType": "uint256",
-				"name": "",
+				"name": "finishTime",
 				"type": "uint256"
-			}
-		],
-		"stateMutability": "pure",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "EGGS_TO_HATCH_1MINERS",
-		"outputs": [
+			},
 			{
 				"internalType": "uint256",
-				"name": "",
+				"name": "level",
 				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getAvailableEarnings",
-		"outputs": [
+			},
 			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
+				"internalType": "address",
+				"name": "reffy",
+				"type": "address"
 			}
 		],
 		"stateMutability": "view",
@@ -257,133 +194,85 @@
 	{
 		"inputs": [
 			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "MainKey",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "ovrTotalDeps",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "ovrTotalWiths",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "users",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "compounds",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
 				"internalType": "address",
-				"name": "adr",
+				"name": "",
 				"type": "address"
 			}
 		],
-		"name": "getEggsSinceLastHatch",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
 		"inputs": [],
-		"name": "getMyEggs",
+		"name": "userInfo",
 		"outputs": [
 			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getMyMiners",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_account",
-				"type": "address"
-			}
-		],
-		"name": "getUserInfo",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "_initialDeposit",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_userDeposit",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_miners",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_claimedEggs",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_lastHatch",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_lastSell",
-				"type": "uint256"
-			},
-			{
-				"internalType": "address",
-				"name": "_referrer",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_totalWithdrawn",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_referralEggRewards",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_comopundCount",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "initialized",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "marketEggs",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "key",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "depoTime",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "finishTime",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "level",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "reffy",
+						"type": "address"
+					}
+				],
+				"internalType": "struct Depo[]",
+				"name": "depoList",
+				"type": "tuple[]"
 			}
 		],
 		"stateMutability": "view",
@@ -397,12 +286,52 @@
 				"type": "address"
 			}
 		],
-		"name": "referrals",
+		"name": "UsersKey",
 		"outputs": [
 			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
+				"internalType": "uint256",
+				"name": "startDate",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "divs",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "refBonus",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "totalInits",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "totalWiths",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "totalAccrued",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "lastWith",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "timesCmpd",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "keyCounter",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
