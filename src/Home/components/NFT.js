@@ -624,7 +624,7 @@ export default function NFT() {
             </div>
             <div className="col-lg-2 stat">
               <div className="header">
-                <span>Total Deposit</span>
+                <span>Total Purchased</span>
               </div>
               <div>
                 <strong className="number">${ totalDeposit }</strong>
@@ -680,50 +680,34 @@ export default function NFT() {
         <div class="row stats-row-container">
           <div class="col-lg-2 stat">
             <div class="header">
-              <i class="bi-bank"></i>
-              <span> Initial Deposit</span>
+              <span> Total Purchased</span>
             </div>
             <strong id="initial-deposit" class="number">${initialDeposit}</strong>
-            {/* <div>
-              <strong class="busd">BUSD</strong>
-            </div> */}
           </div>
           <div class="col-lg-2 stat">
             <div class="header">
-              <i class="bi-bank"></i>
-                <span> Current Rewards</span>
+              <span> Current Rewards</span>
             </div>
             <strong id="total-deposit" class="number">${ (Number(currentRewards)).toFixed(3)} </strong>
-            {/* <div>
-              <strong class="busd">BUSD</strong>
-            </div> */}
           </div>
           <div class="col-lg-2 stat">
             <div class="header">
-              <i class="bi-wallet2"></i>
-                <span> Total Claimed</span>
+              <span> Total Claimed</span>
             </div>
             <div>
               <strong id="total-withdrawn" class="number">${Number(totalClaimed).toFixed(2)}</strong>
             </div>
-            {/* <div>
-              <strong class="busd">BNB</strong>
-            </div> */}
           </div>
           <div class="col-lg-2 stat">
             <div class="header">
-              <i class="bi-people"></i>
-                <span> Referral Rewards </span>
+              <span> Total Rewards </span>
             </div>
             <div>
-              <strong id="ref-rewards-busd" class="number">${Number(totalReferralRewards).toFixed(2)}</strong>
+              <strong id="ref-rewards-busd" class="number">${Number(totalReferralRewards).toFixed(2) + Number(totalClaimed).toFixed(2)}</strong>
             </div>
-            {/* <div>
-              <strong class="busd">BNB</strong>
-            </div> */}
           </div>
         </div>
-        <div className="myNFT">
+        <div>
           <>
             {userInfo.map((item) => (
               // console.log('item => ', item)
@@ -769,9 +753,9 @@ export default function NFT() {
         
       </Container>
       <div className='row' style={{display:'flex', justifyContent:'space-around', margin:'0px'}}>
-          <Container2 style={{width:'100%'}} className='col'>
+          {/* <Container2 style={{width:'100%'}} className='col'>
             <div style={{color:'white', fontSize:'30px'}}>
-              Referrals Earned
+              Referral rewards
             </div>
             <div style={{margin:'10px 0px'}}>
               <Typography variant='body5'>
@@ -779,15 +763,15 @@ export default function NFT() {
               </Typography>
             </div>
               <button className='btn_buy' onClick={withdrawRef}>Withdraw</button>
-          </Container2>
-          <Container2 className="col">
+          </Container2> */}
+          <Container2 className="col-lg-4">
             <div style={{color:'white', fontSize:'30px'}}>
               Referral Link
             </div>
             <h3 type="button" onClick={() => navigator.clipboard.writeText("https://boredapeminer.netlify.app?ref=" + address)} className="referralButton"><FaCopy size="1.6em" className="pr-3" />COPY LINK</h3>
-            <Typography variant='body7'>
+            {/* <Typography variant='body7'>
               Earn 10% when someone uses your referral link.
-            </Typography>
+            </Typography> */}
           </Container2>
       </div>
     </>

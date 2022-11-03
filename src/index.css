@@ -53,13 +53,13 @@ code {
   width: 50%;
 }
 
-.myNFT {
+/* .myNFT {
   display: flex;
-}
+} */
 
 .claimBtnContainer {
-  padding-left: 50px;
-  align-self: center;
+  display: inline-block;
+  padding: 20px 30px;
 }
 
 .referralButton {
@@ -158,9 +158,9 @@ code {
     width: inherit;
   }
 
-  .myNFT {
+  /* .myNFT {
     display: unset;
-  }
+  } */
 
   .claimBtnContainer {
     text-align: center;
