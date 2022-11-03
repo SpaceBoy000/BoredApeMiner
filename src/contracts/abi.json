@@ -173,6 +173,11 @@
 				"internalType": "address",
 				"name": "reffy",
 				"type": "address"
+			},
+			{
+				"internalType": "bool",
+				"name": "done",
+				"type": "bool"
 			}
 		],
 		"stateMutability": "view",
@@ -186,6 +191,25 @@
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "Investors",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
 			}
 		],
 		"stateMutability": "view",
@@ -268,6 +292,11 @@
 						"internalType": "address",
 						"name": "reffy",
 						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "done",
+						"type": "bool"
 					}
 				],
 				"internalType": "struct Depo[]",
@@ -310,7 +339,7 @@
 			},
 			{
 				"internalType": "uint256",
-				"name": "totalWiths",
+				"name": "totalWithRefBonus",
 				"type": "uint256"
 			},
 			{

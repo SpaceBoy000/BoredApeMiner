@@ -29,14 +29,16 @@ const theme = createTheme({
     body1: {  //NFT Labels
       fontSize: 16,
       fontWeight: "bolder",
+      opacity:'0.7',
     },
     body2: {
       fontSize: 16,
     },
     body5: {
       fontSize: 40,
-      color: "rgb(123,63,228)",
+      color: 'white',
       fontWeight: 900,
+      padding:'10px',
     },
     body6: {
       fontSize: 40,
@@ -44,9 +46,10 @@ const theme = createTheme({
       fontWeight: 900,
     },
     body7: {
-      fontSize: 14,
-      color: "rgb(123,63,228)",
+      fontSize: 20,
+      color: "white",
       fontWeight: 900,
+      opacity:'0.7'
     },
     allVariants: {
       color: "white", // "rgb(224, 224, 224)",

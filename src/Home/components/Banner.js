@@ -59,8 +59,8 @@ export default function Banner() {
           Discover, buy Bored Ape, and claim your BUSD
         </CustomCardHeader>
         <div style={{font:'20px', color:'white', opacity:'0.7', padding:'12px'}}>
-          Discover the most outstanding NTFs in all topics of life.
-          Creative your NTFs and sell them
+          Discover the most outstanding Bored Apes in all topics of life. 
+          Creative your Bored Apes and sell them.
         </div>
       </div>
       <div className='banner_image_container'>

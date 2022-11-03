@@ -7,11 +7,12 @@ import Web3 from "web3";
 import { useContractContext } from "../../providers/ContractProvider";
 import { useAuthContext } from "../../providers/AuthProvider";
 import { useEffect, useRef, useState } from "react";
-import { config } from "../../config";
+import { config, deployTime } from "../../config";
 import { useLocation } from "react-router-dom";
 import { styled } from "@mui/system";
 import { useTranslation } from "react-i18next";
 import { Toast } from "../../utils"
+import { FaCopy, FaWallet, FaUserShield, FaSearchDollar } from 'react-icons/fa';
 
 import nft1 from "../assets/nfts/1.png";
 import nft2 from "../assets/nfts/2.png";
@@ -20,6 +21,7 @@ import nft4 from "../assets/nfts/4.png";
 import nft5 from "../assets/nfts/5.png";
 import nft6 from "../assets/nfts/6.png";
 import nft7 from "../assets/nfts/7.png";
+import { getSelectUnstyledUtilityClass } from "@mui/base";
 
 const Container = styled('div')(({theme}) => ({
   // minWidth: 250,
@@ -36,13 +38,15 @@ const Container = styled('div')(({theme}) => ({
 
 const Container2 = styled('div')(({theme}) => ({
   // minWidth: 250,
-  margin: "50px 20px 30px 20px",
+  margin: "20px",
+  padding:'30px',
   // display: 'flex',
   // transition: "box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
   // overflow: "hidden",
   // boxShadow: "rgba(0, 0, 0, 0.35) 0px 2px 3px",
   borderRadius: "20px",
   background: theme.palette.purple.main,
+  // margin:'0px 10px',
   // marginBottom: 24,
 }));
 
@@ -57,6 +61,10 @@ const CardWrapper = styled("div")(({ theme }) => ({
   borderRadius: "20px",
   background: theme.palette.purple.main,
   marginBottom: 24,
+  border: 'solid 1px #0e131f',
+  '&:hover': {
+    boxShadow: "0 0 0.1em #fff, 0 0 0.2em #fff, 0 0 0.3em #fff, 0 0 0.4em #f5ea1a, 0 0 0.6em #e0f734, 0 0 0.8em #ebf705, 0 0 1em #e1f414, 0 0 1.2em #cde60f",
+  },
   [theme.breakpoints.down('md')]: {
     width: '90%',
   }
@@ -273,13 +281,13 @@ export default function NFT() {
   const [loading, setLoading] = useState(false);
   const query = useQuery();
 
-  const EGGS_TO_HIRE_1MINERS = 1440000; // 3.3%, 864000: 10%;
-
-  const [lasthatch, setLasthatch] = useState(0);
+  const [days, setDays] = useState(0);
   const [lastSell, setLastSell] = useState(0);
   const [compoundTimes, setCompoundTimes] = useState(0);
   const [level, setLevel] = useState(3);
   const [initialDeposit, setInitialDeposit] = useState(0);
+  const [currentRewards, setCurrentRewards] = useState(0);
+  const [refBonus, setRefBonus] = useState(0);
   const [totalDeposit, setTotalDeposit] = useState(0);
   const [totalClaimed, setTotalClaimed] = useState(0);
   const [totalReferralRewards, setTotalReferralRewards] = useState(0);
@@ -293,20 +301,6 @@ export default function NFT() {
 
   // Lottery
   const zeroAddrss = '0x0000000000000000000000000000000000000000';
-  const [roundStarted, setRoundStarted] = useState(false);
-  const [roundStartTime, setRoundStartTime] = useState(0);
-  const [lotteryWinner, setLotteryWinner] = useState(zeroAddrss);
-  const [roundIntervalLottery, setRoundIntervalLottery] = useState(0);
-  const [ticketCount, setTicketCount] = useState(0);
-  const [lastTicketCount, setLastTicketCount] = useState(0);
-  const [totalTicketCount, setTotalTicketCount] = useState(0);
-  const [countdownLottery, setCountdownLottery] = useState({
-    alive: true,
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0
-  })
   const [owner, setOwner] = useState('0x5886b6b942f8dab2488961f603a4be8c3015a1a9');
 
   const getCountdown = (lastCompound) => {
@@ -401,7 +395,7 @@ export default function NFT() {
     
     console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxx');
     try {
-      const [busdAmount, allowancement, mainKey, userInfo] = await Promise.all([
+      const [busdAmount, allowancement, mainKey, userInfo, usersKey, currentRewards] = await Promise.all([
         getBusdBalance(address),
         getBusdApproved(address),
         contract.methods.MainKey(1)
@@ -415,6 +409,18 @@ export default function NFT() {
           .catch((err) => {
           console.error('user info error: ', err);
           return;
+        }),
+        contract.methods.UsersKey(address)
+          .call()
+          .catch((err) => {
+          console.error('user info error: ', err);
+          return;
+        }),
+        contract.methods.calcdiv(address)
+          .call()
+          .catch((err) => {
+          console.error('user info error: ', err);
+          return;
         })
       ]);
       setWalletBalance({
@@ -422,17 +428,21 @@ export default function NFT() {
         allowance: fromWei(`${allowancement}`),
       });
       setUserCount(mainKey.users);
-      console.log('user info => ', userInfo);
+      setTotalDeposit(fromWei(mainKey.ovrTotalDeps));
+      console.log('usersKey=> ', usersKey);
       setUserInfo(userInfo);
+      setInitialDeposit(fromWei(usersKey.totalInits.toString()));
+      setRefBonus(fromWei(usersKey.refBonus.toString()));
+      setTotalClaimed(fromWei(usersKey.totalAccrued.toString()));
+      setTotalReferralRewards(fromWei(usersKey.totalWithRefBonus.toString()));
+      setCurrentRewards(fromWei(currentRewards.toString()));
     } catch (err) {
       console.error(err);
       setWalletBalance({
         busdAmount: 0,
         allownace: 0,
       });
-      setLasthatch(0);
-      setLastSell(0);
-      setCompoundTimes(0);
+      
       setInitialDeposit(0);
       setTotalDeposit(0);
       setTotalClaimed(0);
@@ -458,6 +468,8 @@ export default function NFT() {
         const parsedData = await returnedData.json();
         console.log('address: ', parsedData.result.from);
         setOwner(parsedData.result.from);
+        const days = Math.floor((Date.now() - deployTime * 1000) / 86400 / 1000);
+        setDays(days);
       } catch(err) {
         console.log(err)
       }
@@ -578,58 +590,56 @@ export default function NFT() {
     setLoading(false);
   };
 
+  const withdrawRef = async () => {
+    setLoading(true);
+
+    try {
+      await contract.methods.withdrawRefBonus().send({
+        from: address
+      });
+    } catch (err) {
+      console.log(err);
+    }
+    fetchWalletBalance();
+    fetchContractBNBBalance();
+    setLoading(false);
+  }
+
   return (
     <>
-      <Container2>
+      <Container>
         {/* <div className="content-box"> */}
           <div className="row stats-row-container">
             <div className="col-lg-2 stat">
               <div className="header">
-                <i className="bi-bank"></i>
                 <span> TVL</span>
               </div>
-              <strong id="initial-deposit" className="number"> ${ contractBNB } </strong>
-              {/* <div>
-                <strong className="busd">BNB</strong>
-              </div> */}
+              <strong className="number"> ${ contractBNB } </strong>
             </div>
             <div className="col-lg-2 stat">
               <div className="header">
-                <i className="bi-bank"></i>
-                  <span> Users</span>
+                <span> Total Miners</span>
               </div>
-              <strong id="total-deposit" className="number">{ userCount }</strong>
-              {/* <div>
-                <strong className="busd">BNB</strong>
-              </div> */}
+              <strong className="number">{ userCount }</strong>
             </div>
             <div className="col-lg-2 stat">
               <div className="header">
-                <i className="bi-wallet2"></i>
-                  <span> Stake Fee</span>
+                <span>Total Deposit</span>
               </div>
               <div>
-                <strong id="total-withdrawn" className="number">10%</strong>
+                <strong className="number">${ totalDeposit }</strong>
               </div>
-              {/* <div>
-                <strong className="busd">BNB</strong>
-              </div> */}
             </div>
             <div className="col-lg-2 stat">
               <div className="header">
-                <i className="bi-people"></i>
-                  <span> Collection Fee </span>
+                <span>Days</span>
               </div>
               <div>
-                <strong id="ref-rewards-busd" className="number">10%</strong>
+                <strong className="number">{ days }</strong>
               </div>
-              {/* <div>
-                <strong className="busd">BNB</strong>
-              </div> */}
             </div>
           </div>
-        {/* </div> */}
-      </Container2>
+      </Container>
       <Container>
         <div style={{color:'white', fontSize:'30px', padding:'10px 30px'}}>
           Purchase Bored Ape
@@ -637,7 +647,7 @@ export default function NFT() {
         <div>
           {nutritionFacts.map((item, index) => (
             <CardWrapper>
-              <div style={{margin:'5px'}}>
+              <div style={{margin:'5px', textAlign:'center'}}>
                 <img src={item[0].path} alt="nft" width="100%" style={{borderRadius: '20px'}}/>
                 <CardContent>
                   <Typography variant="h5" color="white" paddingBottom={1}>
@@ -673,7 +683,7 @@ export default function NFT() {
               <i class="bi-bank"></i>
               <span> Initial Deposit</span>
             </div>
-            <strong id="initial-deposit" class="number">$3265</strong>
+            <strong id="initial-deposit" class="number">${initialDeposit}</strong>
             {/* <div>
               <strong class="busd">BUSD</strong>
             </div> */}
@@ -683,7 +693,7 @@ export default function NFT() {
               <i class="bi-bank"></i>
                 <span> Current Rewards</span>
             </div>
-            <strong id="total-deposit" class="number">$300</strong>
+            <strong id="total-deposit" class="number">${ (Number(currentRewards)).toFixed(3)} </strong>
             {/* <div>
               <strong class="busd">BUSD</strong>
             </div> */}
@@ -694,7 +704,7 @@ export default function NFT() {
                 <span> Total Claimed</span>
             </div>
             <div>
-              <strong id="total-withdrawn" class="number">$1000</strong>
+              <strong id="total-withdrawn" class="number">${Number(totalClaimed).toFixed(2)}</strong>
             </div>
             {/* <div>
               <strong class="busd">BNB</strong>
@@ -706,7 +716,7 @@ export default function NFT() {
                 <span> Referral Rewards </span>
             </div>
             <div>
-              <strong id="ref-rewards-busd" class="number">$136</strong>
+              <strong id="ref-rewards-busd" class="number">${Number(totalReferralRewards).toFixed(2)}</strong>
             </div>
             {/* <div>
               <strong class="busd">BNB</strong>
@@ -718,8 +728,8 @@ export default function NFT() {
             {userInfo.map((item) => (
               // console.log('item => ', item)
               <CardWrapper>
-                <div style={{margin:'5px'}}>
-                  <img src={nutritionFacts[item.level][0].path} alt="nft" width="100%" style={{borderRadius: '20px'}}/>
+                <div style={{margin:'5px', textAlign:'center'}}>
+                  <img src={nutritionFacts[item.level][0].path} alt="nft" width="100%" style={{borderRadius: '20px', margin: 'auto'}}/>
                   <CardContent>
                     <Typography variant="h5" color="white" paddingBottom={1}>
                       {t(nutritionFacts[item.level][0].name)}
@@ -738,7 +748,7 @@ export default function NFT() {
                             Rewards
                           </Typography>
                           <Typography gutterBottom >
-                            ${(Number(nutritionFacts[item.level][1].properties[0].value.slice(1)) * (Math.min(Date.now() / 1000, item.finishTime) - item.depoTime) / 86400).toFixed(1) }
+                            ${(Number(nutritionFacts[item.level][1].properties[0].value.slice(1)) * (Math.min(Date.now() / 1000, item.finishTime) - item.depoTime) / 86400).toFixed(4) }
                           </Typography>
                         </Grid>
                     </Box>
@@ -747,12 +757,39 @@ export default function NFT() {
               </CardWrapper>
             ))}
           </>
-          <div className="claimBtnContainer">
-            <button className='btn_buy' onClick={ eatBeans }>Claim</button>
-          </div>
+          {
+            userInfo.length == 0 ?
+            <></>
+            :
+            <div className="claimBtnContainer">
+              <button className='btn_buy' onClick={ eatBeans }>Claim</button>
+            </div>
+          }
         </div>
         
       </Container>
+      <div className='row' style={{display:'flex', justifyContent:'space-around', margin:'0px'}}>
+          <Container2 style={{width:'100%'}} className='col'>
+            <div style={{color:'white', fontSize:'30px'}}>
+              Referrals Earned
+            </div>
+            <div style={{margin:'10px 0px'}}>
+              <Typography variant='body5'>
+                ${Number(refBonus).toFixed(2)}
+              </Typography>
+            </div>
+              <button className='btn_buy' onClick={withdrawRef}>Withdraw</button>
+          </Container2>
+          <Container2 className="col">
+            <div style={{color:'white', fontSize:'30px'}}>
+              Referral Link
+            </div>
+            <h3 type="button" onClick={() => navigator.clipboard.writeText("https://boredapeminer.netlify.app?ref=" + address)} className="referralButton"><FaCopy size="1.6em" className="pr-3" />COPY LINK</h3>
+            <Typography variant='body7'>
+              Earn 10% when someone uses your referral link.
+            </Typography>
+          </Container2>
+      </div>
     </>
   );
 }
