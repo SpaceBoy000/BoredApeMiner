@@ -12,17 +12,11 @@ import { config } from "../../config";
 import bannerImg from "../assets/banner.png"
 
 const CardWrapper = styled("div")(({ theme }) => ({
-  padding: "29px",
+  margin: '50px 0px',
   display:'flex',
   flexDirection: 'row',
-  width:'80%',
-  marginLeft:'10%',
-  marginTop:'50px',
   [theme.breakpoints.down('md')] : {
     flexDirection: 'column',
-    marginTop:'30px',
-    width:'100%',
-    marginLeft:'0%',
   }
 }));
 
@@ -34,11 +28,11 @@ const CustomCardHeader = styled(Typography)(({ theme }) => ({
   textUnderlinePosition: "under",
   color: "white",
   fontSize: '40px',
-  marginBottom:'50px',
+  margin:'50px 0px',
   [theme.breakpoints.down('md')]: {
     width:'100%',
     fontSize: '30px',
-    marginBottom:'20px',
+    margin:'20px 0px',
   }
 }))
 
@@ -53,18 +47,18 @@ const UnderlineTypography = styled(Typography)(({ theme }) => ({
 export default function Banner() {
 
   return (
-    <CardWrapper>
-      <div className='banner_header'>
+    <CardWrapper className="row">
+      <div className='col left_box'>
         <CustomCardHeader>
           Discover, buy Bored Ape, and claim your BUSD
         </CustomCardHeader>
-        <div style={{font:'20px', color:'white', opacity:'0.7', padding:'12px'}}>
+        <div style={{font:'20px', color:'white', opacity:'0.7'}}>
           Discover the most outstanding Bored Apes in all topics of life. 
           Creative your Bored Apes and sell them.
         </div>
       </div>
-      <div className='banner_image_container'>
-        <img src={bannerImg} className='banner_img'/>
+      <div className='col right_box' >
+        <img src={bannerImg} width='100%'/>
       </div>
     </CardWrapper>
   );

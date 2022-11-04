@@ -43,15 +43,13 @@ code {
   display: none;
 }
 
-.banner_header {
-  width: 50%;
+.left_box {
+  padding-left: 100px;
+}
+/* .banner_header {
   padding: 50px 20px;
-}
+} */
 
-.banner_image_container {
-  /* margin-left: 15px; */
-  width: 50%;
-}
 
 /* .myNFT {
   display: flex;
@@ -146,25 +144,14 @@ code {
     text-align: center;
   }
 
-  .banner_header {
-    width: 100%;
-  }
-
-  .banner_image_container {
-    width: 100%;
-  }
-
-  .banner_img {
-    width: inherit;
-  }
-
-  /* .myNFT {
-    display: unset;
-  } */
-
   .claimBtnContainer {
     text-align: center;
     padding: 10px 0px 30px 0px;
+  }
+  
+  .left_box {
+    padding-left: 30px;
+    margin-bottom: 50px;
   }
 }
 

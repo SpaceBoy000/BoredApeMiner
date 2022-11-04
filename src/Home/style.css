@@ -80,6 +80,10 @@
     -webkit-animation: animate-preloader 1s linear infinite;
     animation: animate-preloader 1s linear infinite;
   }
+
+  .calvino {
+    font-family: Poppins;
+  }
   
   @-webkit-keyframes animate-preloader {
     0% {
@@ -739,6 +743,81 @@
     color: white;
   }
   
+  .faqheading {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 30px;
+    color: #05EDAC;
+    text-align: left;
+  }
+
+  .amount {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    color: #FFFFFF;
+    margin-top: 10px;
+  }
+
+  .accordion-button {
+    background: transparent;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    padding: 0px;
+  }
+  
+  .accordion {
+    background: transparent !important;
+  }
+  
+  .accordion-item {
+    background: #111827 !important;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 20px 0px;
+  }
+
+  .accordion-item:first-of-type {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+
+  .accordion-item:last-of-type {
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
+
+  .text-lightblue {
+    color: white;
+  }
+
+  .text-center {
+    text-align: center !important; 
+  }
+
+  /* .accordion-button > #plus {
+    display: none;
+  }
+  .accordion-button > #minus {
+    display: block;
+  }
+
+
+  .accordion-button.collapsed > #plus {
+    display: block;
+  }
+
+  .accordion-button.collapsed > #minus {
+    display: none;
+  } */
+
   @media (max-width: 768px) {
     .stats-row-container .stat {
       padding: 10px 5px 10px 5px;
@@ -1886,11 +1965,9 @@
   
   .accordion-button:focus {
     box-shadow: none;
-    /* color: #f4c444; */
   }
   
   .accordion-button:hover {
-    /* box-shadow: none; */
     color: #f4c444;
   }
   

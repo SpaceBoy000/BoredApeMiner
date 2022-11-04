@@ -13,6 +13,10 @@ import { styled } from "@mui/system";
 import { useTranslation } from "react-i18next";
 import { Toast } from "../../utils"
 import { FaCopy, FaWallet, FaUserShield, FaSearchDollar } from 'react-icons/fa';
+import { Accordion } from "react-bootstrap";
+import plusIcon from "../assets/icons/plusIcon.svg";
+import minusIcon from "../assets/icons/minusIcon.svg";
+import FAQList from "../../components/faq/FaqAccordian";
 
 import nft1 from "../assets/nfts/1.png";
 import nft2 from "../assets/nfts/2.png";
@@ -261,6 +265,52 @@ export default function NFT() {
         ]
       },
     ],
+  ];
+
+  const faqData = [
+    {
+      title: `What is Boredapeminer?`,
+      content: 
+        <p>
+            Bored Ape Miner is BUSD miner on Binance Smartchain that offers up to 303% Return of Investemnt
+        </p>
+    },
+    {
+        title: `How to deposit?`,
+        content: 
+          <p>
+            You need to fund your trust wallet, Metamask or any applicable cryptocurrency wallet with at least 5 BUSD (BEP20).
+          </p>
+    },
+    {
+        title: `How much is the fee for deposit?`,
+        content: 
+          <p>
+            There is a 10% fee for both deposit and withdraw.
+          </p>
+    },
+    {
+        title: `Can I earn without Investment?`,
+        content: 
+          <p>
+            Yes, you can purchase Free Bored Ape for no cost just click buy button, then buy you will get your earnings thru miner and refferal once your refferal get purchased with minimum 2 busd withdrawal.
+            And you can purchase only one Free Bored Ape.
+          </p>
+    },
+    {
+        title: `How long can I withdraw?`,
+        content: 
+          <p>
+             You can withdraw your profit anytime as long as there is balance in the contract with minimum $2 in your current rewards and no maximum withdrawal.
+          </p>
+    },
+    {
+        title: `Is there a minimum withdrawal amount? Also, when can I withdraw?`,
+        content: 
+          <p>
+            The minimum amount for withdrawals is 2 BUSD and No maximum rewards. And you can withdraw anytime.
+          </p>
+    },
   ];
 
   const colorMode = ["005c45", "870100", "A00Bfc", "10AA63", "F66C31", "287350", "E4FA2b"];
@@ -605,6 +655,21 @@ export default function NFT() {
     setLoading(false);
   }
 
+  const copyRefLink = async () => {
+    if (!address) {
+      Toast.fire({
+        icon: 'error',
+        title: 'Please connect your wallet'
+      });
+    } else {
+      navigator.clipboard.writeText("https://boredapeminer.netlify.app?ref=" + address);
+      Toast.fire({
+        icon: 'success',
+        title: 'Copied to clipboard!'
+      });
+    }
+    
+  }
   return (
     <>
       <Container>
@@ -703,7 +768,7 @@ export default function NFT() {
               <span> Total Rewards </span>
             </div>
             <div>
-              <strong id="ref-rewards-busd" class="number">${Number(totalReferralRewards).toFixed(2) + Number(totalClaimed).toFixed(2)}</strong>
+              <strong id="ref-rewards-busd" class="number">${(Number(totalReferralRewards) + Number(totalClaimed)).toFixed(2)}</strong>
             </div>
           </div>
         </div>
@@ -768,12 +833,38 @@ export default function NFT() {
             <div style={{color:'white', fontSize:'30px'}}>
               Referral Link
             </div>
-            <h3 type="button" onClick={() => navigator.clipboard.writeText("https://boredapeminer.netlify.app?ref=" + address)} className="referralButton"><FaCopy size="1.6em" className="pr-3" />COPY LINK</h3>
+            <h3 type="button" onClick={copyRefLink} className="referralButton"><FaCopy size="1.6em" className="pr-3" />COPY LINK</h3>
             {/* <Typography variant='body7'>
               Earn 10% when someone uses your referral link.
             </Typography> */}
           </Container2>
       </div>
+      {/* <FAQList/> */}
+      <div style={{marginTop:'50px'}}>
+        {/* <h1 style={{color:'white', fontWeight:'100', padding:'20px'}}>Frequently Asked Questions</h1> */}
+        <div style={{color:'white', fontSize:'30px', padding:'10px 30px'}}>Frequently Asked Questions</div>
+        <Accordion style={{padding:'0px 30px'}}>
+        {faqData.map((item, index) => {
+            return (
+                // <Reveal key={index} className='onStep' keyframes={fadeInUp} delay={100 * index} duration={800}>
+                  <Accordion.Item eventKey={{ index }} style={{background:"transparent", border:"none"}}>
+                      <Accordion.Header style={{color: 'white !important', margin: 'auto', display:'flex', justifyContent:'space-between'}}>
+                          <div className="faqheading">
+                              {item.title}
+                          </div>
+                          {/* <img id='plus' src={plusIcon}/>
+                          <img id='minus' src={minusIcon}/> */}
+                      </Accordion.Header>
+                      <Accordion.Body className="amount">
+                          {item.content}
+                      </Accordion.Body>
+                  </Accordion.Item>
+                // </Reveal>
+            )
+        }
+        )}
+        </Accordion>
+    </div>
     </>
   );
 }

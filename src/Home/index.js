@@ -17,7 +17,7 @@ import BackBrand from "./components/BackBrand";
 
 const Wrapper = styled("div")(({ theme }) => ({
   // maxWidth: 400,
-  margin: "0 auto",
+  // margin: "0 auto",
   [theme.breakpoints.down("sm")]: {
     maxWidth: "100%",
   },
