@@ -50,11 +50,11 @@ export default function Banner() {
     <CardWrapper className="row">
       <div className='col left_box'>
         <CustomCardHeader>
-          Discover, buy Bored Ape, and claim your BUSD
+          Discover, buy CryptoPunk, and claim your BUSD
         </CustomCardHeader>
         <div style={{font:'20px', color:'white', opacity:'0.7'}}>
-          Discover the most outstanding Bored Apes in all topics of life. 
-          Creative your Bored Apes and sell them.
+          Discover the most outstanding CryptoPunk in all topics of life. 
+          Creative your CryptoPunk and sell them.
         </div>
       </div>
       <div className='col right_box' >

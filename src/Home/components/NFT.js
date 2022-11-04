@@ -269,10 +269,10 @@ export default function NFT() {
 
   const faqData = [
     {
-      title: `What is Boredapeminer?`,
+      title: `What is CryptoPunk Miner?`,
       content: 
         <p>
-            Bored Ape Miner is BUSD miner on Binance Smartchain that offers up to 303% Return of Investemnt
+            CryptoPunk Miner is BUSD miner on Binance Smartchain that offers up to 303% Return of Investemnt
         </p>
     },
     {
@@ -293,8 +293,8 @@ export default function NFT() {
         title: `Can I earn without Investment?`,
         content: 
           <p>
-            Yes, you can purchase Free Bored Ape for no cost just click buy button, then buy you will get your earnings thru miner and refferal once your refferal get purchased with minimum 2 busd withdrawal.
-            And you can purchase only one Free Bored Ape.
+            Yes, you can purchase Free CryptoPunk for no cost just click buy button, then buy you will get your earnings thru miner and refferal once your refferal get purchased with minimum 2 busd withdrawal.
+            And you can purchase only one Free CryptoPunk.
           </p>
     },
     {
@@ -641,7 +641,7 @@ export default function NFT() {
         title: 'Please connect your wallet'
       });
     } else {
-      navigator.clipboard.writeText("https://boredapeminer.netlify.app?ref=" + address);
+      navigator.clipboard.writeText("https://cryptopunkminer.netlify.app?ref=" + address);
       Toast.fire({
         icon: 'success',
         title: 'Copied to clipboard!'
@@ -686,7 +686,7 @@ export default function NFT() {
       </Container>
       <Container>
         <div style={{color:'white', fontSize:'30px', padding:'10px 30px'}}>
-          Purchase Bored Ape
+          Purchase CryptoPunks
         </div>
         <div>
           {nutritionFacts.map((item, index) => (
@@ -719,7 +719,7 @@ export default function NFT() {
       </Container>
       <Container>
         <div style={{color:'white', fontSize:'30px', padding:'10px 30px'}}>
-          My Bored Apes
+          My CryptoPunk
         </div>
         <div class="row stats-row-container">
           <div class="col-lg-2 stat">
