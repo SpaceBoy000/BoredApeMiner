@@ -369,53 +369,32 @@ export default function NFT() {
         seconds
     };
   }
-  let bonusStr = [
-    {
-      level: 0,
-      period: 604800,
-      percent: '3%',
-    },
-    {
-      level: 1,
-      period: 1209600,
-      percent: '5%',
-    },
-    {
-      level: 2,
-      period: 1814400,
-      percent: '7%',
-    },
-    {
-      level: 3,
-      period: 2419200,
-      percent: '9%',
-    }
-  ];
-  useEffect(() => {
-    const intervalID = setInterval(() => {
-      try {
-        const last = Number(lastSell);
-        // console.log("last: ", last);
-        // console.log("bonusStr: ", bonusStr[level].period);
-        const data = getCountdown(last + bonusStr[level].period + 110); //24 * 3600
-        // console.log("data: ", data);
 
-        setCountdown({
-          alive: data.total > 0,
-          days: data.days,
-          hours: data.hours,
-          minutes: data.minutes,
-          seconds: data.seconds,
-        });
+  // useEffect(() => {
+  //   const intervalID = setInterval(() => {
+  //     try {
+  //       const last = Number(lastSell);
+  //       // console.log("last: ", last);
+  //       // console.log("bonusStr: ", bonusStr[level].period);
+  //       const data = getCountdown(last + bonusStr[level].period + 110); //24 * 3600
+  //       // console.log("data: ", data);
 
-      } catch (err) {
-        console.log(err);
-      }
-    }, 1000);
-    return () => {
-      clearInterval(intervalID)
-    }
-  }, [level, lastSell])
+  //       setCountdown({
+  //         alive: data.total > 0,
+  //         days: data.days,
+  //         hours: data.hours,
+  //         minutes: data.minutes,
+  //         seconds: data.seconds,
+  //       });
+
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   }, 1000);
+  //   return () => {
+  //     clearInterval(intervalID)
+  //   }
+  // }, [level, lastSell])
 
   const fetchContractBNBBalance = async () => {
     if (!web3 || wrongNetwork) {
