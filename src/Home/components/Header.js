@@ -15,6 +15,8 @@ import TelegramIcon from '@mui/icons-material/Telegram';
 import { FaDiscord } from 'react-icons/fa';
 import { BscscanIcon } from "../../components/Icons";
 import { SiBinance } from 'react-icons/si';
+import logoImg from "../assets/logo_color.png";
+
 
 const Wrapper = styled("div")(({ theme }) => ({
   // position: "fixed",
@@ -77,6 +79,7 @@ export default function Header() {
             <div className="mobile_herader_content">
               <div style={{alignSelf:"center", marginBottom:"30px"}}>
                 <img src="./favicon.png" alt="ETH Snowball" width="64px"/>
+                {/* <img src={ logoImg } alt="ETH Snowball" width="64px"/> */}
               </div>
               <div className="mobile_four_btn">
                 <div onClick= {() => {
@@ -158,10 +161,11 @@ export default function Header() {
       <Grid container spacing={2}>
         <Grid item xs={9} sm={3.5}>
           <div style={{textAlign:"center", display:'flex', alignItems:'center'}}>
-            <img src="./favicon.png" alt="" style={{ padding: '5px 20px', maxHeight: "64px"}} />
-            <Typography variant="h5" textAlign="center" color='white'>
+            {/* <img src="./favicon.png" alt="" style={{ padding: '5px 20px', maxHeight: "64px"}} /> */}
+            <img src={ logoImg } alt="" style={{ padding: '5px 20px', maxHeight: "64px"}} />
+            {/* <Typography variant="h5" textAlign="center" color='white'>
               Bored Ape Miner
-            </Typography>
+            </Typography> */}
           </div>
         </Grid>
         <Grid className="header_menu" item xs={12} sm={5}>
