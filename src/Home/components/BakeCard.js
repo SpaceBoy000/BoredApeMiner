@@ -21,7 +21,7 @@ import { Toast } from "../../utils"
 import { shorten } from "./Connect";
 import ReferralLink from "./ReferralLink";
 
-import busdBanner from "../assets/ads_720_80.mp4";
+// import busdBanner from "../assets/ads_720_80.mp4";
 
 const CardWrapper = styled("div")(({ theme }) => ({
   maxWidth: 400,
@@ -404,7 +404,7 @@ export default function BakeCard() {
           <div class="container main" data-aos="fade-up">
             <div style={{marginTop:'10px'}}>
               <a href="https://defidetective.app/" target="_blank">
-              <video src={ busdBanner } playsInline loop="true" muted="unmuted" width="100%" style={{borderRadius:'8px'}} ref={videoRef}></video>
+              {/* <video src={ busdBanner } playsInline loop="true" muted="unmuted" width="100%" style={{borderRadius:'8px'}} ref={videoRef}></video> */}
               </a>
             </div>
             <div class="content-box">

@@ -18,13 +18,12 @@ import plusIcon from "../assets/icons/plusIcon.svg";
 import minusIcon from "../assets/icons/minusIcon.svg";
 import FAQList from "../../components/faq/FaqAccordian";
 
-import nft1 from "../assets/nfts/1.png";
-import nft2 from "../assets/nfts/2.png";
-import nft3 from "../assets/nfts/3.png";
-import nft4 from "../assets/nfts/4.png";
-import nft5 from "../assets/nfts/5.png";
-import nft6 from "../assets/nfts/6.png";
-import nft7 from "../assets/nfts/7.png";
+import nft1 from "../assets/nfts/1.jpg";
+import nft2 from "../assets/nfts/2.jpg";
+import nft3 from "../assets/nfts/3.jpg";
+import nft4 from "../assets/nfts/4.jpg";
+import nft5 from "../assets/nfts/5.jpg";
+import nft6 from "../assets/nfts/6.jpg";
 import { getSelectUnstyledUtilityClass } from "@mui/base";
 
 const Container = styled('div')(({theme}) => ({
@@ -86,32 +85,6 @@ export default function NFT() {
     [
       {
         path: nft1,
-        name: 'Free'
-      },
-      {
-        properties : [
-          {
-            label: t("Daily Return"),
-            value: '$0.01',
-          },
-          {
-            label: t("Price"),
-            value: "free",
-          },
-          {
-            label: t("Life Span"),
-            value: 'forever',
-          },
-          {
-            label: t("Total Income"),
-            value: 'no limit',
-          }
-        ]
-      },
-    ],
-    [
-      {
-        path: nft2,
         name: 'Common'
       },
       {
@@ -137,7 +110,7 @@ export default function NFT() {
     ],
     [
       {
-        path: nft3,
+        path: nft2,
         name: 'Uncommon'
       },
       {
@@ -163,7 +136,7 @@ export default function NFT() {
     ],
     [
       {
-        path: nft4,
+        path: nft3,
         name: 'Rare'
       },
       {
@@ -189,7 +162,7 @@ export default function NFT() {
     ],
     [
       {
-        path: nft5,
+        path: nft4,
         name: 'Super Rare'
       },
       {
@@ -215,7 +188,7 @@ export default function NFT() {
     ],
     [
       {
-        path: nft6,
+        path: nft5,
         name: 'Legendary'
       },
       {
@@ -241,7 +214,7 @@ export default function NFT() {
     ],
     [
       {
-        path: nft7,
+        path: nft6,
         name: 'Mytical'
       },
       {
@@ -269,10 +242,10 @@ export default function NFT() {
 
   const faqData = [
     {
-      title: `What is CryptoPunk Miner?`,
+      title: `What is Lunky Bunny Miner?`,
       content: 
         <p>
-            CryptoPunk Miner is BUSD miner on Binance Smartchain that offers up to 303% Return of Investemnt
+            Lunky Bunny Miner is BUSD miner on Binance Smartchain that offers up to 303% Return of Investemnt
         </p>
     },
     {
@@ -287,14 +260,6 @@ export default function NFT() {
         content: 
           <p>
             There is a 10% fee for both deposit and withdraw.
-          </p>
-    },
-    {
-        title: `Can I earn without Investment?`,
-        content: 
-          <p>
-            Yes, you can purchase Free CryptoPunk for no cost just click buy button, then buy you will get your earnings thru miner and refferal once your refferal get purchased with minimum 2 busd withdrawal.
-            And you can purchase only one Free CryptoPunk.
           </p>
     },
     {
@@ -686,7 +651,7 @@ export default function NFT() {
       </Container>
       <Container>
         <div style={{color:'white', fontSize:'30px', padding:'10px 30px'}}>
-          Purchase CryptoPunks
+          Purchase Lucky Bunnies
         </div>
         <div>
           {nutritionFacts.map((item, index) => (
@@ -719,7 +684,7 @@ export default function NFT() {
       </Container>
       <Container>
         <div style={{color:'white', fontSize:'30px', padding:'10px 30px'}}>
-          My CryptoPunk
+          My Lucky Bunnies
         </div>
         <div class="row stats-row-container">
           <div class="col-lg-2 stat">
