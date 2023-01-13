@@ -558,7 +558,7 @@ export default function NFT() {
     }
     
     try {
-      await contract.methods.buyBoredApe(toWei(price.toString()), index, ref).send({
+      await contract.methods.buyCryptoPunk(toWei(price.toString()), index, ref).send({
         from: address,
       });
     } catch (err) {
@@ -641,7 +641,7 @@ export default function NFT() {
         title: 'Please connect your wallet'
       });
     } else {
-      navigator.clipboard.writeText("https://cryptopunkminer.netlify.app?ref=" + address);
+      navigator.clipboard.writeText("https://cryptopunkminer.com/?ref=" + address);
       Toast.fire({
         icon: 'success',
         title: 'Copied to clipboard!'

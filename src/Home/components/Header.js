@@ -85,7 +85,7 @@ export default function Header() {
                 <div onClick= {() => {
                   setMobile(true)
                 }}>
-                  <a href="https://www.encryptosecurity.com/AuditRecord?project=64" target="_blank"
+                  <a href="https://auditlink" target="_blank"
                     className="swap_btn"
                     style={{
                       color: 'white',
@@ -125,7 +125,7 @@ export default function Header() {
                     {/* <TwitterIcon/> */}
                   </a>
                 </div>
-                <div onClick={() => {
+                {/* <div onClick={() => {
                   setMobile(true)
                 }}>
                   <a href="https://lottery.wcminer.com/" target="__blank"
@@ -138,7 +138,7 @@ export default function Header() {
                   >
                     Lottery
                   </a>
-                </div>
+                </div> */}
               </div>
               <div style={{flex:1}}></div>
               <div
@@ -170,7 +170,7 @@ export default function Header() {
         </Grid>
         <Grid className="header_menu" item xs={12} sm={5}>
           <Item>
-            <a href="https://www.encryptosecurity.com/AuditRecord?project=64" target="_blank"
+            <a href="https://auditlink" target="_blank"
               style={{
                 textDecoration: 'none',
                 fontWeight: "bolder",

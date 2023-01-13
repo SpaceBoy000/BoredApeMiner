@@ -1,13 +1,13 @@
 import React from "react";
 import styles from "./Footer.module.css";
-
+import { config } from "../../../config";
 const Footer = () => {
   const footerArray = [
-    { items: "AUDIT", to: "https://www.encryptosecurity.com/AuditRecord?project=64" },
-    { items: "CONTRACT", to: "https://bscscan.com/address/0xae12362c87dab9cf6567f63c892dd80f38828d8f" },
-    { items: "DISCORD", to: "https://discord.gg/bBwPdV6q8U" },
-    { items: "TELEGRAM", to: "https://t.me/WCMinerOfficial" },
-    { items: "TWITTER", to: "https://twitter.com/WolfOfCrypto885" },
+    { items: "AUDIT", to: "https://auditlink" },
+    { items: "CONTRACT", to: config.scanLink },
+    { items: "DISCORD", to: "https://discord.gg/" },
+    { items: "TELEGRAM", to: "https://t.me/" },
+    { items: "TWITTER", to: "https://twitter.com/" },
   ];
 
   return (
@@ -23,10 +23,9 @@ const Footer = () => {
           >
             {el.items}
           </a>
-          /* I have looped the footerArray here so that we can use less code and you can edit it easily */
         ))}
       </div>
-      <p className={styles.copyRight}>© Bored Ape Team , All Rights Reserved</p>
+      <p className={styles.copyRight}>© CryptoPunk Team , All Rights Reserved</p>
     </div>
   );
 };

@@ -2,62 +2,6 @@
 	{
 		"inputs": [
 			{
-				"internalType": "uint256",
-				"name": "amtx",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_level",
-				"type": "uint256"
-			},
-			{
-				"internalType": "address",
-				"name": "ref",
-				"type": "address"
-			}
-		],
-		"name": "buyBoredApe",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_account",
-				"type": "address"
-			}
-		],
-		"name": "changeOwner",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "claimRewards",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_amount",
-				"type": "uint256"
-			}
-		],
-		"name": "fundContract",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
 				"internalType": "address",
 				"name": "_busd",
 				"type": "address"
@@ -65,42 +9,6 @@
 		],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
-	},
-	{
-		"inputs": [],
-		"name": "withdrawRefBonus",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "BoredApeGroup",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "daysInSeconds",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "dailyProfit",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "price",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
 	},
 	{
 		"inputs": [],
@@ -118,16 +26,26 @@
 	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "dy",
-				"type": "address"
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
-		"name": "calcdiv",
+		"name": "CryptoPunkGroup",
 		"outputs": [
 			{
 				"internalType": "uint256",
-				"name": "",
+				"name": "daysInSeconds",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "dailyProfit",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "price",
 				"type": "uint256"
 			}
 		],
@@ -184,13 +102,19 @@
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "getBalance",
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "FreeMinted",
 		"outputs": [
 			{
-				"internalType": "uint256",
+				"internalType": "bool",
 				"name": "",
-				"type": "uint256"
+				"type": "bool"
 			}
 		],
 		"stateMutability": "view",
@@ -250,64 +174,6 @@
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "owner",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "userInfo",
-		"outputs": [
-			{
-				"components": [
-					{
-						"internalType": "uint256",
-						"name": "key",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "depoTime",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "finishTime",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "level",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address",
-						"name": "reffy",
-						"type": "address"
-					},
-					{
-						"internalType": "bool",
-						"name": "done",
-						"type": "bool"
-					}
-				],
-				"internalType": "struct Depo[]",
-				"name": "depoList",
-				"type": "tuple[]"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "address",
@@ -361,6 +227,152 @@
 				"internalType": "uint256",
 				"name": "keyCounter",
 				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "amtx",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_level",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "ref",
+				"type": "address"
+			}
+		],
+		"name": "buyCryptoPunk",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "dy",
+				"type": "address"
+			}
+		],
+		"name": "calcdiv",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_account",
+				"type": "address"
+			}
+		],
+		"name": "changeOwner",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "claimRewards",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "fundContract",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getBalance",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "userInfo",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "key",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "depoTime",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "finishTime",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "level",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "reffy",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "done",
+						"type": "bool"
+					}
+				],
+				"internalType": "struct Depo[]",
+				"name": "depoList",
+				"type": "tuple[]"
 			}
 		],
 		"stateMutability": "view",
