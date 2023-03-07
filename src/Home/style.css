@@ -802,7 +802,7 @@
     text-align: center !important; 
   }
 
-  /* .accordion-button > #plus {
+  .accordion-button > #plus {
     display: none;
   }
   .accordion-button > #minus {
@@ -816,7 +816,7 @@
 
   .accordion-button.collapsed > #minus {
     display: none;
-  } */
+  }
 
   @media (max-width: 768px) {
     .stats-row-container .stat {

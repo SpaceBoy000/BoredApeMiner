@@ -783,7 +783,7 @@ export default function NFT() {
             </Typography> */}
           </Container2>
       </div>
-      {/* <FAQList/> */}
+      <FAQList/>
       <div style={{marginTop:'50px'}}>
         {/* <h1 style={{color:'white', fontWeight:'100', padding:'20px'}}>Frequently Asked Questions</h1> */}
         <div style={{color:'white', fontSize:'30px', padding:'10px 30px'}}>Frequently Asked Questions</div>
@@ -796,8 +796,8 @@ export default function NFT() {
                           <div className="faqheading">
                               {item.title}
                           </div>
-                          {/* <img id='plus' src={plusIcon}/>
-                          <img id='minus' src={minusIcon}/> */}
+                          <img id='plus' src={plusIcon}/>
+                          <img id='minus' src={minusIcon}/>
                       </Accordion.Header>
                       <Accordion.Body className="amount">
                           {item.content}
